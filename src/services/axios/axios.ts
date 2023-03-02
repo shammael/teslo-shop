@@ -1,7 +1,7 @@
 import fetchAxios from 'axios';
 
 const axios = fetchAxios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: 'https://teslo-backend-production-716f.up.railway.app',
 });
 
 export default axios;
