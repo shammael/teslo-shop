@@ -11,14 +11,14 @@ import {
   CardContent,
   Divider,
   Box,
-  Button,
   Chip,
 } from '@mui/material';
 import {
   CreditCardOffOutlined,
   CreditScoreOutlined,
 } from '@mui/icons-material';
-import { ReactElement } from 'react';
+import { ReactElement, useContext } from 'react';
+import { CartContext } from '@/context';
 import { NextPageWithLayout } from '../_app';
 
 interface Props {
@@ -31,6 +31,7 @@ const OrderPage: NextPageWithLayout<Props> = ({
   orden = { pagado: false },
 }) => {
   const { pagado = false } = orden;
+  const { cart } = useContext(CartContext);
   return (
     <Box sx={{ maxWidth: '1200px', mx: 'auto' }}>
       <Typography variant="h1" component="h1">
@@ -63,7 +64,7 @@ const OrderPage: NextPageWithLayout<Props> = ({
         }}
       >
         <Grid item xs={12} md={7}>
-          <CartList />
+          <CartList products={cart.products} />
         </Grid>
         <Grid item xs={12} md={4} style={{ maxWidth: '400px' }}>
           <Card className="summary-card">
@@ -74,7 +75,7 @@ const OrderPage: NextPageWithLayout<Props> = ({
               <Divider sx={{ my: 1 }} />
               <DirectionSummary />
               <Divider sx={{ my: 1 }} />
-              <OrdenSummary />
+              <OrdenSummary total={cart.total} />
               {/* <Box sx={{ mt: 3 }}>
                 <Button color="secondary" className="circular-btn" fullWidth>
                   Confirmar orden
